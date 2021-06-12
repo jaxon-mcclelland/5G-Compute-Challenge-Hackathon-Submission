@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+   dashboard:
+     image: iotapi:latest
+     container_name: dashboard
+     restart: always
+     ports:
+       - "8000:8000"
+   nginx:
+     image: nginx:latest
+     container_name: nginx
+     ports:
+       - "80:80"
+       - "443:443"
+     volumes:
+       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+       - .:/app
+#   certbot:
+#     image: certbot/certbot
+#     container_name: certbot
+#     volumes:
+#       - .:/app
+#       - ./certbot/etc:/etc/letsencrypt
+#       - ./certbot/var:/var/lib/letsencrypt
+#     command: certonly --webroot --webroot-path=/app --email andrew.burger@awbtech.org --agree-tos --no-eff-email --staging -d 5gweather.tk

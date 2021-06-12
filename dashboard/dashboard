@@ -1,0 +1,12 @@
+server {
+ listen 80;
+ server_name 5gweather.tk 34.215.227.56;
+ location = /favicon.ico { access_log off; log_not_found off; }
+ location /static/ {
+  root /app;
+ }
+ location / {
+  include proxy_params;
+  proxy_pass http://unix:/app/app.sock;
+ }
+}
